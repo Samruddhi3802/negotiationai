@@ -50,6 +50,7 @@ jobs:
       - name: Build Frontend Image
         run: |
           docker build \
+          --build-arg VITE_API_URL="https://backend-service-ahrj.onrender.com" \
           -t ghcr.io/${{ steps.repo.outputs.repo }}/frontend:latest \
           -f frontend/Dockerfile .
 
