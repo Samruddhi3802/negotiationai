@@ -1,0 +1,94 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700&display=swap');
+
+:root {
+  --bg-main: #0a0b14;
+  --bg-gradient: radial-gradient(circle at top right, #1a1b3b, #0a0b14);
+  --accent-primary: #9061f9;
+  --accent-secondary: #00e5ff;
+  --glass-bg: rgba(255, 255, 255, 0.03);
+  --glass-border: rgba(255, 255, 255, 0.08);
+  --text-main: #ffffff;
+  --text-dim: #94a3b8;
+  --sidebar-width: 260px;
+  --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  --sidebar-bg: rgba(255, 255, 255, 0.02);
+  --chat-input-area-bg: rgba(0, 0, 0, 0.2);
+  --chat-bubble-ai-bg: rgba(255, 255, 255, 0.05);
+  --chat-bubble-ai-border: rgba(255, 255, 255, 0.08);
+  --chat-bubble-ai-text: #ffffff;
+  --stat-card-bg: rgba(255, 255, 255, 0.03);
+  --dashboard-placeholder-border: dashed rgba(255, 255, 255, 0.08);
+}
+
+:root.light {
+  --bg-main: #f8fafc;
+  --bg-gradient: radial-gradient(circle at top right, #e0e7ff, #f1f5f9);
+  --accent-primary: #7c3aed; /* Royal Violet */
+  --accent-secondary: #0d9488; /* Premium Teal */
+  --glass-bg: rgba(255, 255, 255, 0.6);
+  --glass-border: rgba(0, 0, 0, 0.08);
+  --text-main: #0f172a; /* Dark Slate */
+  --text-dim: #475569; /* Soft Slate */
+  --sidebar-bg: rgba(0, 0, 0, 0.02);
+  --chat-input-area-bg: rgba(0, 0, 0, 0.02);
+  --chat-bubble-ai-bg: rgba(255, 255, 255, 0.85);
+  --chat-bubble-ai-border: rgba(0, 0, 0, 0.06);
+  --chat-bubble-ai-text: #0f172a;
+  --stat-card-bg: rgba(255, 255, 255, 0.6);
+  --dashboard-placeholder-border: dashed rgba(0, 0, 0, 0.15);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  background: var(--bg-main);
+  background-image: var(--bg-gradient);
+  color: var(--text-main);
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+h1, h2, h3, h4 {
+  font-family: 'Outfit', sans-serif;
+  letter-spacing: -0.02em;
+}
+
+.glass-panel {
+  background: var(--glass-bg);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--glass-border);
+  border-radius: 20px;
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+}
+
+button {
+  cursor: pointer;
+  border: none;
+  outline: none;
+  font-family: inherit;
+  transition: var(--transition);
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--glass-border);
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--accent-primary);
+}

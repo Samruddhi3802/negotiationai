@@ -1,0 +1,54 @@
+name: CI/CD Deploy (Render + Docker + GHCR)
+
+on:
+  push:
+    branches: [ "main" ]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: read
+      packages: write
+
+    steps:
+    - name: Checkout Code
+      uses: actions/checkout@v3
+
+    # 🔐 Login to GHCR
+    - name: Login to GHCR
+      run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
+
+    # =========================
+    # 🐳 Build Backend Image
+    # =========================
+    - name: Build Backend Image
+      run: |
+        docker build \
+        -t ghcr.io/${{ github.repository }}/backend:latest \
+        -f backend/Dockerfile .
+
+    - name: Push Backend Image
+      run: docker push ghcr.io/${{ github.repository }}/backend:latest
+
+    # =========================
+    # ⚛️ Build Frontend Image
+    # =========================
+    - name: Build Frontend Image
+      run: |
+        docker build \
+        -t ghcr.io/${{ github.repository }}/frontend:latest \
+        -f frontend/Dockerfile .
+
+    - name: Push Frontend Image
+      run: docker push ghcr.io/${{ github.repository }}/frontend:latest
+
+    # =========================
+    # 🚀 Trigger Render Deploy
+    # =========================
+    - name: Deploy Backend on Render
+      run: curl -X POST ${{ secrets.RENDER_BACKEND_HOOK }}
+
+    - name: Deploy Frontend on Render
+      run: curl -X POST ${{ secrets.RENDER_FRONTEND_HOOK }}
