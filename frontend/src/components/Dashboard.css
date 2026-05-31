@@ -176,3 +176,160 @@
     letter-spacing: 0.02em;
     margin-top: 4px;
 }
+
+/* ZOPA Slider styles */
+.zopa-card {
+    border: 1px solid rgba(192, 132, 252, 0.15);
+}
+
+.zopa-slider-container {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-top: 5px;
+}
+
+.zopa-scale {
+    display: flex;
+    justify-content: space-between;
+    font-size: 10px;
+    color: #64748b;
+    font-weight: 600;
+}
+
+.zopa-bars-container {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    background: rgba(0, 0, 0, 0.25);
+    padding: 15px;
+    border-radius: 12px;
+    border: 1px solid var(--glass-border);
+}
+
+.zopa-bar-track {
+    position: relative;
+    height: 18px;
+    display: flex;
+    align-items: center;
+}
+
+.bar-label {
+    font-size: 10px;
+    font-weight: 700;
+    color: #94a3b8;
+    width: 90px;
+    flex-shrink: 0;
+}
+
+.zopa-bar {
+    position: absolute;
+    height: 100%;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.zopa-bar .bar-value {
+    font-size: 9px;
+    font-weight: 700;
+    color: #0f172a;
+    padding: 0 5px;
+    white-space: nowrap;
+}
+
+.bg-buyer {
+    background: #c084fc;
+}
+
+.bg-seller {
+    background: #38bdf8;
+}
+
+.bg-zopa {
+    background: linear-gradient(90deg, #00e5ff 0%, #7c4dff 100%);
+    box-shadow: 0 0 10px rgba(0, 229, 255, 0.4);
+}
+
+.overlap-track {
+    margin-top: 4px;
+    border-top: 1px dashed rgba(255, 255, 255, 0.1);
+    padding-top: 8px;
+    height: 24px;
+}
+
+.bg-zopa .bar-value {
+    color: #0f172a;
+    font-weight: 800;
+}
+
+.no-zopa-warning {
+    color: #ff3d00;
+    font-size: 11px;
+    font-weight: 700;
+    text-align: center;
+    padding: 5px;
+}
+
+/* Risk Meter styles */
+.risk-card {
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.risk-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.risk-value {
+    font-size: 18px;
+    font-weight: 800;
+}
+
+.risk-meter-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.risk-meter-bar {
+    height: 8px;
+    background: linear-gradient(90deg, #00e5ff 0%, #ffb300 50%, #ff3d00 100%);
+    border-radius: 4px;
+    position: relative;
+}
+
+.risk-pointer {
+    position: absolute;
+    top: -4px;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    border: 2px solid #fff;
+    transform: translateX(-50%);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.5);
+    transition: left 0.3s ease;
+}
+
+.risk-labels {
+    display: flex;
+    justify-content: space-between;
+    font-size: 10px;
+    color: #64748b;
+    font-weight: 500;
+}
+
+/* Concession Chart styles */
+.chart-card {
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.chart-wrapper {
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 12px;
+    padding: 12px 8px 0px 0px;
+    border: 1px solid var(--glass-border);
+}

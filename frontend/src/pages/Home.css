@@ -20,8 +20,8 @@
     display: flex;
     align-items: center;
     gap: 12px;
-    margin-bottom: 50px;
-    padding: 0 10px;
+    margin-bottom: 30px; /* Reduced from 50px */
+    padding: 0 5px;
     justify-content: space-between;
     width: 100%;
 }
@@ -54,8 +54,8 @@
     display: flex;
     flex-direction: column;
     font-weight: 700;
-    line-height: 1.1;
-    font-size: 24px;
+    line-height: 1;
+    font-size: 20px; /* Reduced from 24px */
     font-family: 'Outfit', sans-serif;
 }
 
@@ -208,44 +208,44 @@
     flex: 1;
     display: flex;
     flex-direction: column;
-    padding: 30px;
+    padding: 20px 25px;
     overflow-y: auto;
 }
 
 .top-bar {
     display: flex;
     justify-content: space-between;
-    align-items: flex-start;
-    margin-bottom: 30px;
+    align-items: center;
+    margin-bottom: 20px;
 }
 
 .header-info h2 {
-    font-size: 28px;
-    margin-bottom: 5px;
+    font-size: 24px;
+    margin-bottom: 2px;
 }
 
 .header-info p {
     color: var(--text-dim);
-    font-size: 14px;
+    font-size: 13px;
 }
 
 .user-profile .avatar {
-    width: 45px;
-    height: 45px;
+    width: 40px;
+    height: 40px;
     background: linear-gradient(135deg, var(--accent-primary), #b388ff);
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
     font-weight: 700;
-    font-size: 18px;
+    font-size: 16px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
 }
 
 .content-grid {
     display: grid;
-    grid-template-columns: 1fr 380px;
-    gap: 25px;
+    grid-template-columns: 1fr 340px;
+    gap: 20px;
     flex: 1;
     min-height: 0;
 }
@@ -278,4 +278,250 @@
         height: auto;
         padding: 15px 20px;
     }
+}
+
+/* Full Width Sections (Prep Planner and Review) */
+.full-width-section {
+    grid-column: span 2;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Loading overlay styles */
+.loading-section {
+    align-items: center;
+    justify-content: center;
+    height: 400px;
+    background: rgba(15, 23, 42, 0.45);
+    backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 16px;
+}
+
+.loader-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+    text-align: center;
+}
+
+.loader-spinner {
+    width: 50px;
+    height: 50px;
+    border: 4px solid rgba(124, 77, 255, 0.1);
+    border-top: 4px solid #7c4dff;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.loader-box h3 {
+    font-size: 1.4rem;
+    font-weight: 700;
+    margin: 0;
+}
+
+.loader-box p {
+    color: #94a3b8;
+    margin: 0;
+}
+
+/* Post Negotiation Review Dashboard */
+.post-review-dashboard {
+    padding: 2.5rem;
+    border-radius: 16px;
+    background: rgba(15, 23, 42, 0.45);
+    backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    color: #f8fafc;
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+    max-width: 1200px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.review-header {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.review-tag {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: #00e5ff;
+    font-weight: 700;
+}
+
+.review-header h2 {
+    font-size: 1.8rem;
+    font-weight: 800;
+    margin: 0;
+}
+
+.review-header p {
+    color: #94a3b8;
+    margin: 0;
+}
+
+.review-metrics-row {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1.5rem;
+}
+
+.metric-box {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    align-items: center;
+    justify-content: center;
+}
+
+.metric-box .label {
+    font-size: 0.85rem;
+    color: #94a3b8;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.metric-box .value {
+    font-size: 1.8rem;
+    font-weight: 800;
+}
+
+.metric-box .sub-label {
+    font-size: 0.75rem;
+    color: #64748b;
+}
+
+.text-cyan {
+    color: #00e5ff;
+}
+
+.text-red {
+    color: #ef4444;
+}
+
+.review-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 1.5rem;
+}
+
+.concession-text, .feedback-text {
+    line-height: 1.6;
+    color: #cbd5e1;
+    font-size: 0.95rem;
+    margin: 0;
+}
+
+.tactics-section {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+}
+
+.tactics-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1rem;
+}
+
+.tactic-audit-card {
+    background: rgba(15, 23, 42, 0.4);
+    border: 1px solid rgba(255, 255, 255, 0.04);
+    border-radius: 8px;
+    padding: 1.25rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.tactic-audit-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.tactic-badge {
+    background: rgba(120, 119, 198, 0.15);
+    color: #b388ff;
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+.tactic-turn {
+    font-size: 11px;
+    color: #64748b;
+    font-weight: 500;
+}
+
+.tactic-quote {
+    font-style: italic;
+    color: #94a3b8;
+    margin: 0;
+    padding-left: 8px;
+    border-left: 2px solid rgba(255, 255, 255, 0.1);
+    font-size: 0.9rem;
+    line-height: 1.4;
+}
+
+.tactic-impact {
+    font-size: 0.85rem;
+    color: #cbd5e1;
+    margin: 0;
+}
+
+.empty-tactics {
+    text-align: center;
+    color: #64748b;
+    padding: 1.5rem;
+    font-size: 0.9rem;
+}
+
+.reset-review-btn {
+    background: linear-gradient(90deg, #7c4dff 0%, #aa00ff 100%);
+    border: none;
+    color: #fff;
+    font-size: 1.1rem;
+    font-weight: 700;
+    padding: 1rem 2.5rem;
+    border-radius: 30px;
+    cursor: pointer;
+    align-self: center;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 20px rgba(124, 77, 255, 0.4);
+    margin-top: 1rem;
+}
+
+.reset-review-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 24px rgba(124, 77, 255, 0.6);
+}
+
+.back-btn {
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    color: var(--text-color);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.back-btn:hover {
+    background: var(--border-color);
 }

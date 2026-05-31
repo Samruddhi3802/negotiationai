@@ -1,72 +1,183 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap');
 
+/* =============================================
+   DESIGN SYSTEM — HSL-based CSS Variables
+   ============================================= */
 :root {
-  --bg-main: #0a0b14;
-  --bg-gradient: radial-gradient(circle at top right, #1a1b3b, #0a0b14);
-  --accent-primary: #9061f9;
-  --accent-secondary: #00e5ff;
+  /* Primary Brand — Violet */
+  --primary-h: 258;
+  --primary-s: 80%;
+  --primary-l: 63%;
+  --accent-primary: hsl(var(--primary-h), var(--primary-s), var(--primary-l));
+  --accent-primary-dim: hsla(var(--primary-h), var(--primary-s), var(--primary-l), 0.12);
+  --accent-primary-glow: hsla(var(--primary-h), var(--primary-s), var(--primary-l), 0.35);
+
+  /* Secondary Brand — Electric Cyan */
+  --secondary-h: 186;
+  --secondary-s: 100%;
+  --secondary-l: 50%;
+  --accent-secondary: hsl(var(--secondary-h), var(--secondary-s), var(--secondary-l));
+  --accent-secondary-dim: hsla(var(--secondary-h), var(--secondary-s), var(--secondary-l), 0.10);
+
+  /* ─── Semantic Negotiation State Colors ─── */
+  /* Green/Cyan: Target Met, 0% risk, excellent deal */
+  --state-target: hsl(186, 100%, 50%);
+  --state-target-dim: hsla(186, 100%, 50%, 0.10);
+  --state-target-glow: hsla(186, 100%, 50%, 0.30);
+
+  /* Amber: Moderate concessions, approaching caution zone */
+  --state-caution: hsl(38, 96%, 55%);
+  --state-caution-dim: hsla(38, 96%, 55%, 0.10);
+
+  /* Red-Orange: Walk-away crossed, high risk */
+  --state-walkaway: hsl(14, 100%, 50%);
+  --state-walkaway-dim: hsla(14, 100%, 50%, 0.10);
+  --state-walkaway-glow: hsla(14, 100%, 50%, 0.30);
+
+  /* Neutral */
+  --state-neutral: hsl(215, 16%, 60%);
+
+  /* ─── Surface & Background ─── */
+  --bg-main: #06070d;
+  --bg-gradient: 
+    radial-gradient(ellipse at top right, hsla(var(--primary-h), 60%, 20%, 0.20) 0%, transparent 55%),
+    radial-gradient(ellipse at bottom left, hsla(var(--secondary-h), 80%, 20%, 0.12) 0%, transparent 55%),
+    linear-gradient(160deg, #0a0b18 0%, #06070d 100%);
+
+  /* ─── Glass & Surfaces ─── */
   --glass-bg: rgba(255, 255, 255, 0.03);
-  --glass-border: rgba(255, 255, 255, 0.08);
-  --text-main: #ffffff;
-  --text-dim: #94a3b8;
+  --glass-bg-hover: rgba(255, 255, 255, 0.05);
+  --glass-border: rgba(255, 255, 255, 0.07);
+  --glass-border-active: rgba(255, 255, 255, 0.14);
+  --glass-highlight: rgba(255, 255, 255, 0.04); /* top-edge light reflection */
+
+  /* ─── Text ─── */
+  --text-main: #f0f4ff;
+  --text-dim: #8892a4;
+  --text-faint: #4a5568;
+
+  /* ─── Layout ─── */
   --sidebar-width: 260px;
-  --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  --sidebar-bg: rgba(255, 255, 255, 0.02);
-  --chat-input-area-bg: rgba(0, 0, 0, 0.2);
-  --chat-bubble-ai-bg: rgba(255, 255, 255, 0.05);
-  --chat-bubble-ai-border: rgba(255, 255, 255, 0.08);
-  --chat-bubble-ai-text: #ffffff;
-  --stat-card-bg: rgba(255, 255, 255, 0.03);
-  --dashboard-placeholder-border: dashed rgba(255, 255, 255, 0.08);
+  --sidebar-bg: rgba(10, 11, 24, 0.60);
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 20px;
+
+  /* ─── Chat ─── */
+  --chat-input-area-bg: rgba(0, 0, 0, 0.25);
+  --chat-bubble-ai-bg: rgba(255, 255, 255, 0.04);
+  --chat-bubble-ai-border: rgba(255, 255, 255, 0.07);
+  --chat-bubble-ai-text: #e8eef8;
+
+  /* ─── Dashboard ─── */
+  --stat-card-bg: rgba(255, 255, 255, 0.025);
+  --dashboard-placeholder-border: dashed rgba(255, 255, 255, 0.07);
+
+  /* ─── Animation ─── */
+  --transition: all 0.28s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-bounce: all 0.35s cubic-bezier(0.25, 1, 0.5, 1);
 }
 
+/* =============================================
+   LIGHT MODE — Frosted macOS Glassmorphism
+   ============================================= */
 :root.light {
-  --bg-main: #f8fafc;
-  --bg-gradient: radial-gradient(circle at top right, #e0e7ff, #f1f5f9);
-  --accent-primary: #7c3aed; /* Royal Violet */
-  --accent-secondary: #0d9488; /* Premium Teal */
-  --glass-bg: rgba(255, 255, 255, 0.6);
-  --glass-border: rgba(0, 0, 0, 0.08);
-  --text-main: #0f172a; /* Dark Slate */
-  --text-dim: #475569; /* Soft Slate */
-  --sidebar-bg: rgba(0, 0, 0, 0.02);
-  --chat-input-area-bg: rgba(0, 0, 0, 0.02);
-  --chat-bubble-ai-bg: rgba(255, 255, 255, 0.85);
+  /* Brand colors shift to deeper, more readable hues in light */
+  --accent-primary: hsl(262, 70%, 52%);
+  --accent-primary-dim: hsla(262, 70%, 52%, 0.08);
+  --accent-primary-glow: hsla(262, 70%, 52%, 0.20);
+  --accent-secondary: hsl(175, 70%, 38%);
+  --accent-secondary-dim: hsla(175, 70%, 38%, 0.08);
+
+  --state-target: hsl(175, 70%, 38%);
+  --state-target-dim: hsla(175, 70%, 38%, 0.08);
+  --state-target-glow: hsla(175, 70%, 38%, 0.18);
+  --state-caution: hsl(32, 90%, 42%);
+  --state-caution-dim: hsla(32, 90%, 42%, 0.08);
+  --state-walkaway: hsl(4, 80%, 50%);
+  --state-walkaway-dim: hsla(4, 80%, 50%, 0.08);
+  --state-walkaway-glow: hsla(4, 80%, 50%, 0.18);
+  --state-neutral: hsl(215, 16%, 45%);
+
+  --bg-main: #f0f4fc;
+  --bg-gradient:
+    radial-gradient(ellipse at top right, hsla(262, 60%, 90%, 0.60) 0%, transparent 55%),
+    radial-gradient(ellipse at bottom left, hsla(175, 60%, 88%, 0.45) 0%, transparent 55%),
+    linear-gradient(160deg, #eef2fb 0%, #f5f7ff 100%);
+
+  --glass-bg: rgba(255, 255, 255, 0.55);
+  --glass-bg-hover: rgba(255, 255, 255, 0.72);
+  --glass-border: rgba(0, 0, 0, 0.07);
+  --glass-border-active: rgba(0, 0, 0, 0.14);
+  --glass-highlight: rgba(255, 255, 255, 0.80);
+
+  --text-main: #0f172a;
+  --text-dim: #475569;
+  --text-faint: #94a3b8;
+
+  --sidebar-bg: rgba(255, 255, 255, 0.48);
+  --chat-input-area-bg: rgba(255, 255, 255, 0.40);
+  --chat-bubble-ai-bg: rgba(255, 255, 255, 0.80);
   --chat-bubble-ai-border: rgba(0, 0, 0, 0.06);
   --chat-bubble-ai-text: #0f172a;
-  --stat-card-bg: rgba(255, 255, 255, 0.6);
-  --dashboard-placeholder-border: dashed rgba(0, 0, 0, 0.15);
+  --stat-card-bg: rgba(255, 255, 255, 0.55);
+  --dashboard-placeholder-border: dashed rgba(0, 0, 0, 0.10);
 }
 
-* {
+/* =============================================
+   BASE RESET & GLOBAL STYLES
+   ============================================= */
+*, *::before, *::after {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+}
+
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
 }
 
 body {
   font-family: 'Inter', sans-serif;
   background: var(--bg-main);
   background-image: var(--bg-gradient);
+  background-attachment: fixed;
   color: var(--text-main);
   min-height: 100vh;
   overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-h1, h2, h3, h4 {
+h1, h2, h3, h4, h5 {
   font-family: 'Outfit', sans-serif;
-  letter-spacing: -0.02em;
+  letter-spacing: -0.025em;
+  line-height: 1.2;
 }
 
+/* =============================================
+   GLASS PANEL UTILITY
+   ============================================= */
 .glass-panel {
   background: var(--glass-bg);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(16px) saturate(180%);
+  -webkit-backdrop-filter: blur(16px) saturate(180%);
   border: 1px solid var(--glass-border);
-  border-radius: 20px;
-  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+  border-top: 1px solid var(--glass-highlight);
+  border-radius: var(--radius-lg);
+  box-shadow: 
+    0 8px 32px 0 rgba(0, 0, 0, 0.30),
+    inset 0 1px 0 var(--glass-highlight);
 }
 
+.glass-panel:hover {
+  border-color: var(--glass-border-active);
+}
+
+/* =============================================
+   BUTTON BASE
+   ============================================= */
 button {
   cursor: pointer;
   border: none;
@@ -75,9 +186,12 @@ button {
   transition: var(--transition);
 }
 
-/* Custom Scrollbar */
+/* =============================================
+   CUSTOM SCROLLBAR
+   ============================================= */
 ::-webkit-scrollbar {
-  width: 6px;
+  width: 5px;
+  height: 5px;
 }
 
 ::-webkit-scrollbar-track {
@@ -85,10 +199,70 @@ button {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: var(--glass-border);
+  background: var(--glass-border-active);
   border-radius: 10px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
   background: var(--accent-primary);
 }
+
+/* =============================================
+   UTILITY CLASSES
+   ============================================= */
+.text-primary  { color: var(--accent-primary); }
+.text-secondary { color: var(--accent-secondary); }
+.text-target   { color: var(--state-target); }
+.text-caution  { color: var(--state-caution); }
+.text-danger   { color: var(--state-walkaway); }
+.text-dim      { color: var(--text-dim); }
+
+.badge-target  {
+  background: var(--state-target-dim);
+  color: var(--state-target);
+  border: 1px solid hsla(var(--secondary-h), 100%, 50%, 0.20);
+  padding: 2px 10px;
+  border-radius: 99px;
+  font-size: 0.75rem;
+  font-weight: 700;
+}
+.badge-caution {
+  background: var(--state-caution-dim);
+  color: var(--state-caution);
+  padding: 2px 10px;
+  border-radius: 99px;
+  font-size: 0.75rem;
+  font-weight: 700;
+}
+.badge-danger {
+  background: var(--state-walkaway-dim);
+  color: var(--state-walkaway);
+  padding: 2px 10px;
+  border-radius: 99px;
+  font-size: 0.75rem;
+  font-weight: 700;
+}
+
+/* =============================================
+   SHIMMER / GLOW ANIMATION
+   ============================================= */
+@keyframes shimmer {
+  0%   { background-position: 200% center; }
+  100% { background-position: -200% center; }
+}
+
+@keyframes glowPulse {
+  0%, 100% { box-shadow: 0 0 8px var(--state-target-glow); }
+  50%       { box-shadow: 0 0 20px var(--state-target-glow), 0 0 40px var(--state-target-glow); }
+}
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.animate-fade-in {
+  animation: fadeInUp 0.4s var(--transition-bounce) both;
+}
+
+

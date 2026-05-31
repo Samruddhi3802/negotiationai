@@ -21,6 +21,7 @@ def analyze(state):
         JSON FORMAT:
         {
           "analysis": "text summary",
+          "extracted_price": 25000, // Numerical price value proposed/offered/demanded by the user in this message (e.g. 15000 for 15,000 or 15k). If no price is mentioned, return null.
           "scorecard": {
             "tactics_score": 0-100,
             "resilience_score": 0-100,
@@ -42,19 +43,22 @@ def analyze(state):
         prompt += """
         Return JSON:
         {
-          "analysis": "text summary"
+          "analysis": "text summary",
+          "extracted_price": null
         }
 
         ONLY return JSON.
         """
 
     response = call_llm(prompt)
+    extracted_price = None
 
     try:
         clean = response.replace("```json", "").replace("```", "").strip()
         data = json.loads(clean)
 
         analysis = data.get("analysis", "")
+        extracted_price = data.get("extracted_price", None)
         scorecard = data.get("scorecard", {})
 
         # fallback safety
@@ -81,5 +85,6 @@ def analyze(state):
     return {
         **state,
         "analysis": analysis,
-        "scorecard": scorecard
+        "scorecard": scorecard,
+        "extracted_user_price": extracted_price
     }
