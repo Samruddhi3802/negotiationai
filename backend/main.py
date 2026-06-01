@@ -9,8 +9,13 @@ if grandparent_dir not in sys.path:
 
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from negotiationai.backend.routes import negotiation
+from negotiationai.backend.routes import negotiation, auth
 from negotiationai.backend.rag.load_data import load_market_data
+from negotiationai.backend.database import engine, Base
+from negotiationai.backend.models import models
+
+# Create database tables
+Base.metadata.create_all(bind=engine)
 
 app = FastAPI()
 
@@ -27,8 +32,13 @@ app.add_middleware(
 def startup_event():
     load_market_data()
 
+app.include_router(auth.router)
 app.include_router(negotiation.router)
 
 @app.get("/")
 def home():
     return {"message": "DealCraft AI & Procurement Server Running"}
+
+if __name__ == "__main__":
+    import uvicorn
+    uvicorn.run("negotiationai.backend.main:app", host="0.0.0.0", port=8000, reload=True)

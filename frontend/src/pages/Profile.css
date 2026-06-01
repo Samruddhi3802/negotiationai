@@ -1,0 +1,181 @@
+.profile-container {
+    padding: 0;
+    width: 100%;
+    margin-top: 10px;
+    color: var(--text-color, #f8fafc);
+}
+
+.profile-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid var(--border-color, #334155);
+}
+
+.profile-info h1 {
+    font-size: 2rem;
+    margin-bottom: 0.25rem;
+}
+
+.profile-email {
+    color: #94a3b8;
+    font-size: 1rem;
+}
+
+.profile-stats {
+    display: flex;
+    gap: 1.5rem;
+}
+
+.stat-card {
+    padding: 1.5rem;
+    border-radius: 1rem;
+    min-width: 150px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.stat-label {
+    font-size: 0.9rem;
+    color: #94a3b8;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.stat-value {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #3b82f6;
+}
+
+.history-section h2 {
+    margin-bottom: 2rem;
+    font-size: 1.8rem;
+}
+
+.history-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.history-item {
+    padding: 1.5rem;
+    border-radius: 1rem;
+    transition: transform 0.2s;
+}
+
+.history-item:hover {
+    transform: translateY(-2px);
+}
+
+.history-item-header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+}
+
+.history-mode-badge {
+    background: #3b82f6;
+    color: white;
+    padding: 0.25rem 0.75rem;
+    border-radius: 2rem;
+    font-size: 0.8rem;
+    font-weight: 600;
+}
+
+.history-date {
+    color: #94a3b8;
+    font-size: 0.9rem;
+}
+
+.history-item-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    margin-bottom: 1rem;
+}
+
+.history-main-info p {
+    margin-bottom: 0.5rem;
+}
+
+.history-score-info {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    justify-content: center;
+}
+
+.history-score-label {
+    font-size: 0.9rem;
+    color: #94a3b8;
+}
+
+.history-score-bar-bg {
+    height: 8px;
+    background: #334155;
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.history-score-bar-fill {
+    height: 100%;
+    border-radius: 4px;
+    transition: width 0.5s ease-out;
+}
+
+.history-score-value {
+    align-self: flex-end;
+    font-weight: 700;
+    font-size: 1.1rem;
+}
+
+.history-feedback {
+    background: rgba(0, 0, 0, 0.2);
+    padding: 1rem;
+    border-radius: 0.5rem;
+    font-style: italic;
+    color: #cbd5e1;
+}
+
+.feedback-preview {
+    margin: 0;
+}
+
+.empty-history {
+    text-align: center;
+    padding: 4rem;
+    background: rgba(30, 41, 59, 0.5);
+    border-radius: 1rem;
+    border: 2px dashed #334155;
+}
+
+.profile-loading, .profile-error {
+    text-align: center;
+    padding: 4rem;
+    font-size: 1.2rem;
+}
+
+.profile-error {
+    color: #ef4444;
+}
+
+@media (max-width: 768px) {
+    .profile-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 2rem;
+    }
+    .profile-stats {
+        width: 100%;
+        justify-content: space-between;
+    }
+    .history-item-content {
+        grid-template-columns: 1fr;
+    }
+}

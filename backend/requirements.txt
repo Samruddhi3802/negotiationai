@@ -7,3 +7,9 @@ elevenlabs
 requests
 chromadb
 duckduckgo-search
+bcrypt==3.2.0
+python-jose[cryptography]
+passlib[bcrypt]
+sqlalchemy
+pydantic[email]
+python-multipart

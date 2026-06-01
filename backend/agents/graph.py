@@ -4,7 +4,7 @@ from negotiationai.backend.agents.personality_agent import detect_personality
 from negotiationai.backend.agents.strategy_agent import decide_strategy
 from negotiationai.backend.agents.generator_agent import generate_reply
 from negotiationai.backend.agents.research_agent import research_vendors
-from typing import TypedDict
+from typing import TypedDict, Optional
 
 class AgentState(TypedDict):
     input: str
@@ -17,6 +17,8 @@ class AgentState(TypedDict):
     scorecard: dict
     vendor_list: list
     draft_emails: list
+    extracted_user_price: Optional[float]
+    extracted_ai_price: Optional[float]
 
 def route_after_strategy(state):
     if state.get("mode") == "procurement":
