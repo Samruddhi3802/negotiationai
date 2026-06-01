@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import API from '../services/api';
 import Sidebar from '../components/Sidebar';
+import { Home, User, Scroll, ArrowLeft } from 'lucide-react';
 import './Profile.css';
 
 const Profile = () => {
@@ -55,15 +56,21 @@ const Profile = () => {
                         <p>Analyze your long-term negotiation performance and tactical history.</p>
                     </div>
                     <button className="control-btn back-btn" onClick={() => navigate('/')}>
-                        🏠 Back to Dojo
+                        <ArrowLeft size={14} style={{ marginRight: '6px' }} />
+                        <span>Back to Dojo</span>
                     </button>
                 </header>
 
                 <div className="profile-container glass-panel">
                     <div className="profile-header">
-                        <div className="profile-info">
-                            <h1>👤 {profile.username}</h1>
-                            <p className="profile-email">{profile.email}</p>
+                        <div className="profile-info-row">
+                            <div className="profile-avatar-large">
+                                <User size={32} />
+                            </div>
+                            <div className="profile-info">
+                                <h1>{profile.username}</h1>
+                                <p className="profile-email">{profile.email}</p>
+                            </div>
                         </div>
                         <div className="profile-stats">
                             <div className="stat-card card-dark">
@@ -78,7 +85,10 @@ const Profile = () => {
                     </div>
 
                     <div className="history-section">
-                        <h2>📜 Negotiation History</h2>
+                        <div className="section-title-row" style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '1.5rem' }}>
+                            <Scroll size={20} className="section-icon text-secondary" />
+                            <h2 style={{ margin: 0 }}>Negotiation History</h2>
+                        </div>
                         {profile.recent_history.length > 0 ? (
                             <div className="history-list">
                                 {profile.recent_history.map((item) => (
@@ -123,7 +133,7 @@ const Profile = () => {
                             </div>
                         ) : (
                             <div className="empty-history">
-                                <p>No negotiation sessions found. Start your first session in the Dojo! 🥋</p>
+                                <p>No negotiation sessions found. Start your first session in the Dojo!</p>
                                 <button className="auth-button" onClick={() => navigate('/')} style={{ marginTop: '1rem', width: 'auto', padding: '0.75rem 2rem' }}>
                                     Go to Dojo
                                 </button>

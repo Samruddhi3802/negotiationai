@@ -1,5 +1,5 @@
 .profile-container {
-    padding: 0;
+    padding: 2.5rem;
     width: 100%;
     margin-top: 10px;
     color: var(--text-color, #f8fafc);
@@ -14,14 +14,34 @@
     border-bottom: 1px solid var(--border-color, #334155);
 }
 
+.profile-info-row {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+.profile-avatar-large {
+    width: 60px;
+    height: 60px;
+    background: linear-gradient(135deg, var(--accent-primary), #b388ff);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    box-shadow: 0 4px 15px rgba(124, 77, 255, 0.3);
+}
+
 .profile-info h1 {
-    font-size: 2rem;
-    margin-bottom: 0.25rem;
+    font-size: 1.8rem;
+    margin: 0 0 0.25rem 0;
+    font-family: 'Outfit', sans-serif;
 }
 
 .profile-email {
     color: #94a3b8;
-    font-size: 1rem;
+    font-size: 0.95rem;
+    margin: 0;
 }
 
 .profile-stats {
@@ -40,7 +60,7 @@
 }
 
 .stat-label {
-    font-size: 0.9rem;
+    font-size: 0.8rem;
     color: #94a3b8;
     text-transform: uppercase;
     letter-spacing: 0.05em;
@@ -49,12 +69,13 @@
 .stat-value {
     font-size: 2rem;
     font-weight: 700;
-    color: #3b82f6;
+    color: var(--accent-secondary);
 }
 
 .history-section h2 {
-    margin-bottom: 2rem;
-    font-size: 1.8rem;
+    margin: 0;
+    font-size: 1.5rem;
+    font-family: 'Outfit', sans-serif;
 }
 
 .history-list {
@@ -80,12 +101,13 @@
 }
 
 .history-mode-badge {
-    background: #3b82f6;
+    background: var(--accent-primary);
     color: white;
     padding: 0.25rem 0.75rem;
     border-radius: 2rem;
     font-size: 0.8rem;
     font-weight: 600;
+    box-shadow: 0 2px 8px rgba(124, 77, 255, 0.25);
 }
 
 .history-date {
@@ -101,7 +123,7 @@
 }
 
 .history-main-info p {
-    margin-bottom: 0.5rem;
+    margin: 0 0 0.5rem 0;
 }
 
 .history-score-info {
@@ -150,7 +172,7 @@
 .empty-history {
     text-align: center;
     padding: 4rem;
-    background: rgba(30, 41, 59, 0.5);
+    background: rgba(30, 41, 59, 0.25);
     border-radius: 1rem;
     border: 2px dashed #334155;
 }

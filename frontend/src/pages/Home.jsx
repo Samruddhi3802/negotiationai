@@ -6,20 +6,31 @@ import PrepPlanner from "../components/PrepPlanner";
 import Sidebar from "../components/Sidebar";
 import API from "../services/api";
 import { useAuth } from "../context/AuthContext";
+import { 
+    FileText, 
+    TrendingUp, 
+    Lightbulb, 
+    ShieldAlert, 
+    RotateCcw,
+    Sparkles,
+    CheckCircle2,
+    XCircle,
+    User
+} from "lucide-react";
 import "./Home.css";
 
 const personas = [
-    { id: "skeptical", label: "Skeptical Anna", icon: "🧐", desc: "Detailed & logical" },
-    { id: "aggressive", label: "Tough Tom", icon: "🥷", desc: "Demands heavy discounts" },
-    { id: "collaborative", label: "Friendly Fred", icon: "🤝", desc: "Seeks a win-win compromise" }
+    { id: "skeptical", label: "Skeptical Anna", desc: "Detailed & logical" },
+    { id: "aggressive", label: "Tough Tom", desc: "Demands heavy discounts" },
+    { id: "collaborative", label: "Friendly Fred", desc: "Seeks a win-win compromise" }
 ];
 
 const negotiationTips = [
-    "💡 Tip: Anchor first! The first offer sets the baseline for the entire negotiation.",
-    "💡 Tip: Leverage Silence. After presenting a price, stay quiet and let the buyer speak first.",
-    "💡 Tip: Focus on value, not price. Explain what they gain rather than what they pay.",
-    "💡 Tip: Always get a concession in return. If you lower your price, ask for a longer contract term.",
-    "💡 Tip: Identify their constraints. Ask open questions to understand their actual budget blockages."
+    "Anchor first! The first offer sets the baseline for the entire negotiation.",
+    "Leverage Silence. After presenting a price, stay quiet and let the buyer speak first.",
+    "Focus on value, not price. Explain what they gain rather than what they pay.",
+    "Always get a concession in return. If you lower your price, ask for a longer contract term.",
+    "Identify their constraints. Ask open questions to understand their actual budget blockages."
 ];
 
 export default function Home() {
@@ -106,15 +117,28 @@ export default function Home() {
             <div className="post-review-dashboard glass-panel">
                 <div className="review-header">
                     <span className="review-tag">Session Completed</span>
-                    <h2>📊 Performance Audit Report</h2>
+                    <div className="review-title-row">
+                        <FileText size={28} className="review-title-icon" />
+                        <h2>Performance Audit Report</h2>
+                    </div>
                     <p>Below is your complete tactical audit and mathematical concession report.</p>
                 </div>
 
                 <div className="review-metrics-row">
                     <div className="metric-box card-dark">
                         <span className="label">Agreement Status</span>
-                        <span className={`value ${agreement_reached ? 'text-green' : 'text-red'}`}>
-                            {agreement_reached ? "Agreement Reached" : "Walked Away"}
+                        <span className={`value-pill ${agreement_reached ? 'status-reached' : 'status-walked'}`}>
+                            {agreement_reached ? (
+                                <>
+                                    <CheckCircle2 size={16} />
+                                    <span>Agreement Reached</span>
+                                </>
+                            ) : (
+                                <>
+                                    <XCircle size={16} />
+                                    <span>Walked Away</span>
+                                </>
+                            )}
                         </span>
                     </div>
                     {agreement_reached && final_price !== null && (
@@ -132,18 +156,27 @@ export default function Home() {
 
                 <div className="review-grid">
                     <div className="review-section card-dark">
-                        <h3>📈 Concession Pattern Analysis</h3>
+                        <div className="section-title-row">
+                            <TrendingUp size={18} className="section-icon" />
+                            <h3>Concession Pattern Analysis</h3>
+                        </div>
                         <p className="concession-text">{concession_pattern}</p>
                     </div>
                     
                     <div className="review-section card-dark">
-                        <h3>💡 AI Coach Debrief</h3>
+                        <div className="section-title-row">
+                            <Lightbulb size={18} className="section-icon" />
+                            <h3>AI Coach Debrief</h3>
+                        </div>
                         <p className="feedback-text">{feedback}</p>
                     </div>
                 </div>
 
                 <div className="review-section tactics-section card-dark">
-                    <h3>🥷 Tactics Spotted Audit</h3>
+                    <div className="section-title-row">
+                        <ShieldAlert size={18} className="section-icon" />
+                        <h3>Tactics Spotted Audit</h3>
+                    </div>
                     <div className="tactics-list">
                         {tactics_spotted && tactics_spotted.length > 0 ? (
                             tactics_spotted.map((t, i) => (
@@ -153,7 +186,10 @@ export default function Home() {
                                         <span className="tactic-turn">Turn {t.turn}</span>
                                     </div>
                                     <blockquote className="tactic-quote">"{t.quote}"</blockquote>
-                                    <p className="tactic-impact">✨ {t.impact}</p>
+                                    <p className="tactic-impact">
+                                        <Sparkles size={12} className="impact-icon" />
+                                        <span>{t.impact}</span>
+                                    </p>
                                 </div>
                             ))
                         ) : (
@@ -163,7 +199,8 @@ export default function Home() {
                 </div>
 
                 <button className="reset-review-btn" onClick={handleReset}>
-                    🥋 Start a New Training Session
+                    <RotateCcw size={16} />
+                    <span>Start a New Training Session</span>
                 </button>
             </div>
         );
@@ -189,7 +226,9 @@ export default function Home() {
                         <p>{mode === "dojo" ? "Try to close the deal without dropping the live profitability margin!" : "AI-driven vendor research and outreach automation."}</p>
                     </div>
                     <div className="user-profile">
-                        <div className="avatar">S</div>
+                        <div className="avatar">
+                            <User size={18} />
+                        </div>
                     </div>
                 </header>
 

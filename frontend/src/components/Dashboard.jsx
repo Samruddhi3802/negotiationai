@@ -1,7 +1,10 @@
+import { useState } from "react";
 import "./Dashboard.css";
-import { Radar, RadarChart, PolarGrid, PolarAngleAxis, ResponsiveContainer, LineChart, Line, XAxis, YAxis, Tooltip, Legend } from 'recharts';
+import { Radar, RadarChart, PolarGrid, PolarAngleAxis, ResponsiveContainer, LineChart, Line, XAxis, YAxis, Tooltip } from 'recharts';
+import { TrendingUp, Award, AlertTriangle, Sparkles } from "lucide-react";
 
 export default function Dashboard({ data, mode, prepData, priceHistory }) {
+    const [activeTab, setActiveTab] = useState("metrics");
 
     if (!data && !prepData) return (
         <div className="dashboard-placeholder">
@@ -78,7 +81,10 @@ export default function Dashboard({ data, mode, prepData, priceHistory }) {
                                 </div>
                             </div>
                         ) : (
-                            <div className="no-zopa-warning">⚠️ No Overlapping ZOPA (Negative Overlap)</div>
+                            <div className="no-zopa-warning">
+                                <AlertTriangle size={14} className="warning-icon" />
+                                <span>No Overlapping ZOPA (Negative Overlap)</span>
+                            </div>
                         )}
                     </div>
                 </div>
@@ -157,51 +163,87 @@ export default function Dashboard({ data, mode, prepData, priceHistory }) {
     return (
         <div className="dashboard-container">
             <h3 className="dashboard-title">
-                {mode === "dojo" ? "🥋 Performance Stats" : "🔍 Procurement Hub"}
+                {mode === "dojo" ? "Performance Stats" : "Procurement Hub"}
             </h3>
             
+            {mode === "dojo" && (
+                <div className="dashboard-tabs">
+                    <button 
+                        className={`dashboard-tab-btn ${activeTab === 'metrics' ? 'active' : ''}`}
+                        onClick={() => setActiveTab('metrics')}
+                    >
+                        <TrendingUp size={14} />
+                        <span>Deal & Metrics</span>
+                    </button>
+                    <button 
+                        className={`dashboard-tab-btn ${activeTab === 'coaching' ? 'active' : ''}`}
+                        onClick={() => setActiveTab('coaching')}
+                    >
+                        <Award size={14} />
+                        <span>Coaching & Strategy</span>
+                    </button>
+                </div>
+            )}
+
             <div className="stats-grid">
                 {/* Dojo Mode Widgets */}
                 {mode === "dojo" && (
                     <>
-                        {zopaRender}
-                        {riskRender}
-                        {chartRender}
-
-                        {scorecard && (
+                        {activeTab === 'metrics' && (
                             <>
-                                <div className="stat-card deal-card" style={{ '--deal-color': dealColor }}>
-                                    <div className="deal-header">
-                                        <span className="stat-label">Live Deal Profitability</span>
-                                        <span className="deal-status" style={{ color: dealColor }}>
-                                            {dealValue >= 70 ? "Excellent" : (dealValue >= 40 ? "At Risk" : "Walking Away")}
-                                        </span>
+                                {zopaRender}
+                                {riskRender}
+                                {chartRender}
+                                {!zopaRender && !riskRender && !chartRender && (
+                                    <div className="dashboard-placeholder-sub">
+                                        <p>Interactive metrics will display once prices are proposed.</p>
                                     </div>
-                                    <div className="score-row">
-                                        <div className="progress-container deal-progress-container">
-                                            <div className="progress-bar deal-bar" style={{ width: `${dealValue}%`, background: dealColor }}></div>
-                                        </div>
-                                        <span className="score-value" style={{ color: dealColor }}>{dealValue}%</span>
-                                    </div>
-                                </div>
+                                )}
+                            </>
+                        )}
 
-                                <div className="stat-card radar-card">
-                                    <span className="stat-label">Emotional Intelligence Radar</span>
-                                    <div className="radar-wrapper">
-                                        <ResponsiveContainer width="100%" height={200}>
-                                            <RadarChart cx="50%" cy="50%" outerRadius="70%" data={radarData}>
-                                                <PolarGrid stroke="rgba(255,255,255,0.1)" />
-                                                <PolarAngleAxis dataKey="subject" tick={{ fill: '#94a3b8', fontSize: 11 }} />
-                                                <Radar name="You" dataKey="A" stroke="#c084fc" fill="#c084fc" fillOpacity={0.5} />
-                                            </RadarChart>
-                                        </ResponsiveContainer>
+                        {activeTab === 'coaching' && (
+                            <>
+                                {scorecard ? (
+                                    <>
+                                        <div className="stat-card deal-card" style={{ '--deal-color': dealColor }}>
+                                            <div className="deal-header">
+                                                <span className="stat-label">Live Deal Profitability</span>
+                                                <span className="deal-status" style={{ color: dealColor }}>
+                                                    {dealValue >= 70 ? "Excellent" : (dealValue >= 40 ? "At Risk" : "Walking Away")}
+                                                </span>
+                                            </div>
+                                            <div className="score-row">
+                                                <div className="progress-container deal-progress-container">
+                                                    <div className="progress-bar deal-bar" style={{ width: `${dealValue}%`, background: dealColor }}></div>
+                                                </div>
+                                                <span className="score-value" style={{ color: dealColor }}>{dealValue}%</span>
+                                            </div>
+                                        </div>
+
+                                        <div className="stat-card radar-card">
+                                            <span className="stat-label">Emotional Intelligence Radar</span>
+                                            <div className="radar-wrapper">
+                                                <ResponsiveContainer width="100%" height={200}>
+                                                    <RadarChart cx="50%" cy="50%" outerRadius="70%" data={radarData}>
+                                                        <PolarGrid stroke="rgba(255,255,255,0.1)" />
+                                                        <PolarAngleAxis dataKey="subject" tick={{ fill: '#94a3b8', fontSize: 11 }} />
+                                                        <Radar name="You" dataKey="A" stroke="#c084fc" fill="#c084fc" fillOpacity={0.5} />
+                                                    </RadarChart>
+                                                </ResponsiveContainer>
+                                            </div>
+                                        </div>
+                                        
+                                        <div className="stat-card feedback-card">
+                                            <span className="stat-label">AI Coach Feedback</span>
+                                            <p className="feedback-text">{scorecard.feedback}</p>
+                                        </div>
+                                    </>
+                                ) : (
+                                    <div className="dashboard-placeholder-sub">
+                                        <p>Coaching, EQ scoring, and strategy feedback will update as the conversation progresses.</p>
                                     </div>
-                                </div>
-                                
-                                <div className="stat-card feedback-card">
-                                    <span className="stat-label">AI Coach Feedback</span>
-                                    <p className="feedback-text">{scorecard.feedback}</p>
-                                </div>
+                                )}
                             </>
                         )}
                     </>
@@ -218,7 +260,10 @@ export default function Dashboard({ data, mode, prepData, priceHistory }) {
                                         <span className="vendor-name">{v.name}</span>
                                         <span className="price-tag">{v.price_estimate}</span>
                                     </div>
-                                    <p className="vendor-pros">✨ {v.pros}</p>
+                                    <p className="vendor-pros">
+                                        <Sparkles size={12} style={{ display: 'inline', marginRight: '4px', verticalAlign: 'middle', color: '#00e5ff' }} />
+                                        <span>{v.pros}</span>
+                                    </p>
                                 </div>
                             ))}
                         </div>

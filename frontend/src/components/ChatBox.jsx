@@ -1,5 +1,14 @@
 import { useState, useEffect, useRef } from "react";
 import API from "../services/api";
+import { 
+    Swords, 
+    Handshake, 
+    LogOut, 
+    ArrowUp, 
+    MessageSquare, 
+    Briefcase,
+    Loader
+} from "lucide-react";
 import "./ChatBox.css";
 
 export default function ChatBox({ setLastData, mode, persona, prepData, priceHistory, setPriceHistory, onConclude }) {
@@ -18,7 +27,6 @@ export default function ChatBox({ setLastData, mode, persona, prepData, priceHis
     }, [chat]);
 
     useEffect(() => {
-        // Clear chat when mode changes
         setChat([]);
     }, [mode]);
 
@@ -29,7 +37,6 @@ export default function ChatBox({ setLastData, mode, persona, prepData, priceHis
         setMessage("");
         setLoading(true);
 
-        // Add user message to chat immediately
         setChat(prev => [...prev, { user: userMsg, ai: null }]);
 
         try {
@@ -43,14 +50,12 @@ export default function ChatBox({ setLastData, mode, persona, prepData, priceHis
             setLastData(res.data);
             setCurrentTone(res.data.tone);
 
-            // Update the last chat item with AI response
             setChat(prev => {
                 const newChat = [...prev];
                 newChat[newChat.length - 1].ai = aiReply;
                 return newChat;
             });
 
-            // Update price history if user or AI proposed a price
             if (mode === "dojo") {
                 const userPrice = res.data.extracted_user_price;
                 const aiPrice = res.data.extracted_ai_price;
@@ -85,6 +90,7 @@ export default function ChatBox({ setLastData, mode, persona, prepData, priceHis
                 <div className="chat-control-bar">
                     <div className="live-status">
                         <span className="status-dot pulsing"></span>
+                        <Swords size={14} className="live-icon text-primary" style={{ marginRight: '6px' }} />
                         <span className="status-lbl">Live Dojo Session</span>
                         {currentTone && (
                             <div className="eq-meter-mini" title="Your Current Emotional Intelligence Tone">
@@ -100,7 +106,8 @@ export default function ChatBox({ setLastData, mode, persona, prepData, priceHis
                             disabled={loading || chat.length === 0}
                             title="Wrap up terms and sign the deal"
                         >
-                            🤝 Conclude Deal
+                            <Handshake size={14} />
+                            <span>Conclude Deal</span>
                         </button>
                         <button 
                             className="control-btn walk-btn" 
@@ -108,7 +115,8 @@ export default function ChatBox({ setLastData, mode, persona, prepData, priceHis
                             disabled={loading || chat.length === 0}
                             title="Reject offers and walk away to BATNA"
                         >
-                            🚪 Walk Away
+                            <LogOut size={14} />
+                            <span>Walk Away</span>
                         </button>
                     </div>
                 </div>
@@ -117,7 +125,9 @@ export default function ChatBox({ setLastData, mode, persona, prepData, priceHis
             <div className="chat-messages">
                 {chat.length === 0 && (
                     <div className="chat-empty-state">
-                        <div className="empty-icon">{mode === 'dojo' ? '🥊' : '🤝'}</div>
+                        <div className="empty-icon">
+                            {mode === 'dojo' ? <Swords size={40} /> : <Briefcase size={40} />}
+                        </div>
                         <h3>Ready to negotiate?</h3>
                         <p>
                             {mode === 'dojo' 
@@ -172,9 +182,9 @@ export default function ChatBox({ setLastData, mode, persona, prepData, priceHis
                         disabled={loading || !message.trim()}
                     >
                         {loading ? (
-                            <div className="loader"></div>
+                            <Loader size={16} className="spinner" />
                         ) : (
-                            <span className="send-icon">↑</span>
+                            <ArrowUp size={16} />
                         )}
                     </button>
                 </div>
