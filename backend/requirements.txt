@@ -5,11 +5,12 @@ langgraph
 python-dotenv
 elevenlabs
 requests
-chromadb
+chromadb>=0.5.0
 duckduckgo-search
-bcrypt==3.2.0
+bcrypt
 python-jose[cryptography]
 passlib[bcrypt]
 sqlalchemy
 pydantic[email]
 python-multipart
+pydantic-settings
