@@ -6,6 +6,9 @@ A powerful, AI-driven negotiation training platform that helps users master thei
 
 The **DealCraft AI** project (NegotiationAI) features a dual-stack architecture (FastAPI backend + React/Vite frontend). It acts as a comprehensive "Negotiation Dojo", pitting users against highly configured AI personas.
 
+### Live Link:
+"https://frontend-service-ia9r.onrender.com"
+
 ### Core Features:
 - **Interactive AI Negotiation:** Engages users in dynamic dialog using state-of-the-art agent workflows constructed via `Langgraph`.
 - **Real-Time EQ Meter:** Analyzes user inputs on the fly to detect emotional tones such as Collaborative, Aggressive, Logical, or Hesitant.
