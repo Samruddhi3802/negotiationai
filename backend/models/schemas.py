@@ -41,7 +41,7 @@ class TokenData(BaseModel):
     username: Optional[str] = None
 
 class NegotiationHistorySchema(BaseModel):
-    id: int
+    id: str
     mode: str
     persona: str
     final_price: Optional[float]
@@ -52,9 +52,10 @@ class NegotiationHistorySchema(BaseModel):
 
     class Config:
         from_attributes = True
+        populate_by_name = True
 
 class UserProfileSchema(BaseModel):
-    id: int
+    id: str
     username: str
     email: str
     negotiation_count: int
@@ -63,3 +64,4 @@ class UserProfileSchema(BaseModel):
 
     class Config:
         from_attributes = True
+        populate_by_name = True

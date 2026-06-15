@@ -1,20 +1,13 @@
-from sqlalchemy import create_engine
-from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy.orm import sessionmaker
 import os
+from pymongo import MongoClient
 
-SQLALCHEMY_DATABASE_URL = "sqlite:///./negotiation_app.db"
+MONGO_URI = os.getenv("MONGO_URI", "mongodb://localhost:27017")
+DB_NAME = os.getenv("MONGO_DB_NAME", "negotiation_app")
 
-engine = create_engine(
-    SQLALCHEMY_DATABASE_URL, connect_args={"check_same_thread": False}
-)
-SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
-
-Base = declarative_base()
+client = MongoClient(MONGO_URI)
+db = client[DB_NAME]
 
 def get_db():
-    db = SessionLocal()
-    try:
-        yield db
-    finally:
-        db.close()
+    # Helper to return the pymongo DB client
+    # FastAPI route dependency compatible
+    return db

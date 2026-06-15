@@ -10,7 +10,8 @@ duckduckgo-search
 bcrypt
 python-jose[cryptography]
 passlib[bcrypt]
-sqlalchemy
+pymongo[srv]==3.12
+dnspython
 pydantic[email]
 python-multipart
 pydantic-settings

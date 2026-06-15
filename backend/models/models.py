@@ -1,29 +1,25 @@
-from sqlalchemy import Column, Integer, String, Float, DateTime, ForeignKey, JSON
-from sqlalchemy.orm import relationship
-from datetime import datetime, timezone
-from negotiationai.backend.database import Base
+# MongoDB Collection Structures Documentation
+# Collections are created dynamically by PyMongo when data is inserted.
 
-class User(Base):
-    __tablename__ = "users"
+"""
+1. "users" Collection Document Structure:
+{
+    "_id": ObjectId,         # Generated automatically
+    "email": "string",
+    "username": "string",
+    "hashed_password": "string"
+}
 
-    id = Column(Integer, primary_key=True, index=True)
-    email = Column(String, unique=True, index=True)
-    username = Column(String, unique=True, index=True)
-    hashed_password = Column(String)
-    
-    negotiations = relationship("NegotiationHistory", back_populates="owner")
-
-class NegotiationHistory(Base):
-    __tablename__ = "negotiation_history"
-
-    id = Column(Integer, primary_key=True, index=True)
-    user_id = Column(Integer, ForeignKey("users.id"))
-    mode = Column(String)
-    persona = Column(String)
-    final_price = Column(Float, nullable=True)
-    agreement_reached = Column(String) # "true" or "false"
-    value_claimed_pct = Column(Float)
-    timestamp = Column(DateTime, default=lambda: datetime.now(timezone.utc))
-    feedback = Column(String)
-    
-    owner = relationship("User", back_populates="negotiations")
+2. "negotiation_history" Collection Document Structure:
+{
+    "_id": ObjectId,
+    "user_id": "string",     # References string conversion of user "_id"
+    "mode": "string",
+    "persona": "string",
+    "final_price": float or null,
+    "agreement_reached": "string", # "true" or "false"
+    "value_claimed_pct": float,
+    "timestamp": datetime,
+    "feedback": "string"
+}
+"""

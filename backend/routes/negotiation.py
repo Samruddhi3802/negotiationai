@@ -1,11 +1,11 @@
 from fastapi import APIRouter, Depends
-from sqlalchemy.orm import Session
+from pymongo.database import Database
 from negotiationai.backend.models.schemas import ChatRequest, ConcludeRequest
 from negotiationai.backend.agents.graph import build_graph
 from negotiationai.backend.services.groq_service import call_llm
 from negotiationai.backend.routes.auth import get_current_user
 from negotiationai.backend.database import get_db
-from negotiationai.backend.models import models
+from datetime import datetime, timezone
 import json
 
 router = APIRouter()
@@ -42,7 +42,7 @@ def chat(req: ChatRequest, current_user=Depends(get_current_user)):
     }
 
 @router.post("/conclude")
-def conclude(req: ConcludeRequest, current_user=Depends(get_current_user), db: Session = Depends(get_db), mode: str = "dojo", persona: str = "skeptical"):
+def conclude(req: ConcludeRequest, current_user=Depends(get_current_user), db: Database = Depends(get_db), mode: str = "dojo", persona: str = "skeptical"):
     # 1. Format chat history for prompt
     history_str = ""
     for turn in req.chat_history:
@@ -127,19 +127,18 @@ def conclude(req: ConcludeRequest, current_user=Depends(get_current_user), db: S
 
     # 4. Save to database
     try:
-        new_history = models.NegotiationHistory(
-            user_id=current_user.id,
-            mode=mode,
-            persona=persona,
-            final_price=data.get("final_price"),
-            agreement_reached=str(data.get("agreement_reached", False)).lower(),
-            value_claimed_pct=data["value_claimed_pct"],
-            feedback=data.get("feedback", "")
-        )
-        db.add(new_history)
-        db.commit()
+        new_history = {
+            "user_id": str(current_user["_id"]),
+            "mode": mode,
+            "persona": persona,
+            "final_price": data.get("final_price"),
+            "agreement_reached": str(data.get("agreement_reached", False)).lower(),
+            "value_claimed_pct": data["value_claimed_pct"],
+            "feedback": data.get("feedback", ""),
+            "timestamp": datetime.now(timezone.utc)
+        }
+        db.negotiation_history.insert_one(new_history)
     except Exception as e:
         print(f"Error saving history: {e}")
-        db.rollback()
 
     return data

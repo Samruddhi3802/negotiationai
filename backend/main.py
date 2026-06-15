@@ -11,11 +11,6 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from negotiationai.backend.routes import negotiation, auth
 from negotiationai.backend.rag.load_data import load_market_data
-from negotiationai.backend.database import engine, Base
-from negotiationai.backend.models import models
-
-# Create database tables
-Base.metadata.create_all(bind=engine)
 
 app = FastAPI()
 

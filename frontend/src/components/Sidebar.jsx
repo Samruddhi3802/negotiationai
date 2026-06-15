@@ -60,7 +60,7 @@ const Sidebar = ({ mode, setMode, persona, setPersona, handleReset, theme, toggl
                     onClick={() => navigate('/')}
                 >
                     <Home size={16} className="icon" />
-                    <span className="label">Home / Dojo</span>
+                    <span className="label">Home</span>
                 </button>
                 
                 {!isProfilePage && (
